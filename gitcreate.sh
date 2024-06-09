@@ -5,6 +5,9 @@ gitcreate(){
     echo "enter repository name"
     read REPO_NAME
 
+    echo "enter Desciption"
+    read DESCRIPTION
+    
     echo "enter first commit message"
     read COMMIT_MESSAGE
 
@@ -27,7 +30,7 @@ gitcreate(){
     -H "Authorization: Bearer $GITHUB_AUTH_TOKEN" \
     -H "X-GitHub-Api-Version: 2022-11-28" \
     https://api.github.com/user/repos \
-    -d "{\"name\":\"$REPO_NAME\",\"homepage\":\"https://github.com\",\"private\":$MAKE_PRIVATE}"
+    -d "{\"name\":\"$REPO_NAME\",\"homepage\":\"https://github.com\",\"private\":$MAKE_PRIVATE , \"description\":\"$DESCRIPTION\"}"
 
     #Push the changes
     git init
