@@ -8,6 +8,15 @@ gitcreate(){
     echo "enter first commit message"
     read COMMIT_MESSAGE
 
+    echo "Make the repository private? (Y/n)"
+    read VISIBILITY
+
+    if [[ $VISIBILITY == "Y" ]];then
+        MAKE_PRIVATE=true
+    else
+        MAKE_PRIVATE=false
+    fi
+
     # #Obtain the username
     GIT_USER_NAME=$(git config --get user.name)
 
@@ -18,7 +27,7 @@ gitcreate(){
     -H "Authorization: Bearer $GITHUB_AUTH_TOKEN" \
     -H "X-GitHub-Api-Version: 2022-11-28" \
     https://api.github.com/user/repos \
-    -d "{\"name\":\"$REPO_NAME\",\"homepage\":\"https://github.com\",\"private\":true}"
+    -d "{\"name\":\"$REPO_NAME\",\"homepage\":\"https://github.com\",\"private\":$MAKE_PRIVATE}"
 
     #Push the changes
     git init
